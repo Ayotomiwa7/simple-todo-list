@@ -1,15 +1,40 @@
 {% extends 'base.html' %}
 
-
 {% block head %}
-
-
-
+<title>Task Manager</title>
 {% endblock%}
 
-
 {% block body %}
+<div class="container">
+    <div class="header">
+        <h1> Task Master </h1>
+    </div>
 
-    <h1> hello </h1>
+    <div class="table-container"></div>
+        <table class="table">
+            <tr>
+                <th>Task</th>
+                <th>Date</th>
+                <th>Actions</th>
+            </tr>
+            {% for task in tasks %}
+                <tr>
+                    <td> {{task.content}} </td>
+                    <td> {{task.date_created.date()}} </td>
+                    <td>
+                        <a href="/update/{{task.id}}"> Update </a>
+                        <br>
+                        <a href="/delete/{{task.id}}"> Delete </a>
+                    </td>
+                </tr>
+            {% endfor %}
+        </table>
+    </div>
 
+    <form class="form" action="/" method="POST">
+        <input type="text" name="content" placeholder="Enter task" required id="content">
+        <input type="submit" value="Add Task">
+    </form>
+
+</div>
 {% endblock%}
